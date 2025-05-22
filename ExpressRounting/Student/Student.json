@@ -1,0 +1,124 @@
+{
+    "Students": [
+        {
+            "id": 1,
+            "name": "Intel",
+            "position": "1st",
+            "post": null,
+            "Class": "JSS1",
+            "Hobbies": [
+                "Reading",
+                "Cooking",
+                "Football"
+            ]
+        },
+        {
+            "id": 2,
+            "name": "Usman Abdullahi",
+            "position": "1st",
+            "post": null,
+            "Class": "JSS2",
+            "Hobbies": [
+                "Reading",
+                "Cooking",
+                "Football"
+            ]
+        },
+        {
+            "id": 3,
+            "name": "Usman Abdullahi",
+            "position": "1st",
+            "post": null,
+            "Class": "JSS2",
+            "Hobbies": [
+                "Reading",
+                "Cooking",
+                "Football"
+            ]
+        },
+        {
+            "id": 4,
+            "name": "Usman Abdullahi",
+            "position": "1st",
+            "post": null,
+            "Class": "JSS2",
+            "Hobbies": [
+                "Reading",
+                "Cooking",
+                "Football"
+            ]
+        },
+        {
+            "id": 5,
+            "name": "Usman Abdullahi",
+            "position": "1st",
+            "post": null,
+            "Class": "JSS2",
+            "Hobbies": [
+                "Reading",
+                "Cooking",
+                "Football"
+            ]
+        },
+        {
+            "id": 6,
+            "name": "Usman Abdullahi",
+            "position": "1st",
+            "post": null,
+            "Class": "JSS2",
+            "Hobbies": [
+                "Reading",
+                "Cooking",
+                "Football"
+            ]
+        },
+        {
+            "id": 7,
+            "name": "Usman Abdullahi",
+            "position": "1st",
+            "post": null,
+            "Class": "JSS2",
+            "Hobbies": [
+                "Reading",
+                "Cooking",
+                "Football"
+            ]
+        },
+        {
+            "id": 8,
+            "name": "Usman Abdullahi",
+            "position": "1st",
+            "post": null,
+            "Class": "JSS2",
+            "Hobbies": [
+                "Reading",
+                "Cooking",
+                "Football"
+            ]
+        },
+        {
+            "id": 9,
+            "name": "Usman Abdullahi",
+            "position": "1st",
+            "post": null,
+            "Class": "JSS2",
+            "Hobbies": [
+                "Reading",
+                "Cooking",
+                "Football"
+            ]
+        },
+        {
+            "id": 10,
+            "name": "Usman Abdullahi",
+            "position": "1st",
+            "post": null,
+            "Class": "JSS2",
+            "Hobbies": [
+                "Reading",
+                "Cooking",
+                "Football"
+            ]
+        }
+    ]
+}

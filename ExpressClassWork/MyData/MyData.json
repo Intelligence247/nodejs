@@ -1,0 +1,81 @@
+{
+    "MyData": [
+        {
+            "id": 1,
+            "name": "Usman",
+            "occupation": "Developer",
+            "Skills": [
+                "Html",
+                "Css",
+                "JS",
+                "TS"
+            ]
+        },
+        {
+            "id": 2,
+            "name": "Usman",
+            "occupation": "Developer",
+            "Skills": [
+                "Html",
+                "Css",
+                "JS",
+                "TS"
+            ]
+        },
+        {
+            "id": 3,
+            "name": "Usman",
+            "occupation": "Developer",
+            "Skills": [
+                "Html",
+                "Css",
+                "JS",
+                "TS"
+            ]
+        },
+        {
+            "id": 1,
+            "name": "Usman",
+            "occupation": "Developer",
+            "Skills": [
+                "Html",
+                "Css",
+                "JS",
+                "TS"
+            ]
+        },
+        {
+            "id": 4,
+            "name": "Usman",
+            "occupation": "Developer",
+            "Skills": [
+                "Html",
+                "Css",
+                "JS",
+                "TS"
+            ]
+        },
+        {
+            "id": 5,
+            "name": "Usman",
+            "occupation": "Developer",
+            "Skills": [
+                "Html",
+                "Css",
+                "JS",
+                "TS"
+            ]
+        },
+        {
+            "id": 6,
+            "name": "Usman",
+            "occupation": "Developer",
+            "Skills": [
+                "Html",
+                "Css",
+                "JS",
+                "TS"
+            ]
+        }
+    ]
+}

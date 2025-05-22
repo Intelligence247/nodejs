@@ -79,6 +79,8 @@ myEmmiter.on("event", function MyEvenwith2Arg(name, age) {
 });
 
 console.log(myEmmiter.listeners("event"));
+const FirstEmmiter = myEmmiter.listeners('event')[0]
+console.log(FirstEmmiter)
 myEmmiter.emit("event", "Usman", 2, 3, 4, 5);
 
 module.exports = logEvents;
