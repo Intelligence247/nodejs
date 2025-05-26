@@ -4,6 +4,7 @@ const path = require("path");
 const cors = require("cors");
 const { logger } = require("./middleware/logEvents");
 const errHandler = require("./middleware/errorHandler");
+const corsOptions = require("./config/corsOption");
 
 // Built in middleware to handle urlencoded data
 // in other word form data
@@ -16,21 +17,6 @@ app.use(express.json());
 app.use(logger);
 // Third party middleware
 // cross origin resource sharing
-const whiteList = [
-  "https://www.yourdomain.com",
-  "http://127.0.0.5500",
-  "http://localhost:4000",
-];
-const corsOptions = {
-  origin: (origin, callback) => {
-    if (whiteList.indexOf(origin) !== -1 || !origin) {
-      callback(null, true);
-    } else {
-      callback(new Error("Not Allowed by Cors"));
-    }
-  },
-  optionsSuccessStatus: 200,
-};
 
 app.use(cors(corsOptions));
 
@@ -52,6 +38,7 @@ const PORT = 4000;
 app.use("/", require("./routes/root"));
 app.use("/Subdir", require("./routes/subdir"));
 app.use("/employees", require("./routes/api/employees"));
+app.use("/users", require("./routes/userRoute"));
 
 app.listen(4000, () => {
   console.log(`Server running on ${PORT}`);
