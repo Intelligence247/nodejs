@@ -5,11 +5,15 @@ const cors = require("cors");
 const { logger } = require("./middleware/logEvents");
 const errHandler = require("./middleware/errorHandler");
 const corsOptions = require("./config/corsOption");
-
+const cookieParser = require("cookie-parser");
 // Built in middleware to handle urlencoded data
 // in other word form data
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
+
+// middleware for cookies
+app.use(cookieParser());
+
 // built in middleware for jsoon
 // app.use(express.json());
 
