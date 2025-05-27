@@ -8,8 +8,8 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
 const path = require("path");
-const { cursorTo } = require("readline");
 const fsPromises = require("fs").promises;
+
 const handleNewUser = async (req, res) => {
   const { user, pwd } = req.body;
 
@@ -23,7 +23,11 @@ const handleNewUser = async (req, res) => {
 
   try {
     const hashedPWD = await bcrypt.hash(pwd, 10);
-    const newUser = { username: user, password: hashedPWD };
+    const newUser = {
+      "username": user,
+      "roles": { User: 2001 },
+      "password": hashedPWD,
+    };
     userDB.setUsers([...userDB.users, newUser]);
     await fsPromises.writeFile(
       path.join(__dirname, "..", "model", "users.json"),
@@ -52,12 +56,16 @@ const handleLogin = async (req, res) => {
   const match = await bcrypt.compare(pwd, foundUser.password);
   if (match) {
     // JWT logic // cmd for installation //  npm i dotenv jsonwebtoken cookie-parser
+    const roles = Object.values(foundUser.roles);
     const accessToken = jwt.sign(
       {
-        username: foundUser.username,
+        "UserInfo": {
+          "username": foundUser.username,
+          "roles": roles,
+        },
       },
       process.env.ACCESS_TOKEN_SECRET,
-      { expiresIn: "30s" }
+      { expiresIn: "60s" }
     );
 
     const refreshToken = jwt.sign(
@@ -69,8 +77,8 @@ const handleLogin = async (req, res) => {
       (person) => person.username !== foundUser.username
     );
 
-    const currentUser = [foundUser, refreshToken];
-    userDB.setUsers = [...otherUsers, currentUser];
+    const currentUser = { ...foundUser, refreshToken };
+    userDB.setUsers([...otherUsers, currentUser]);
 
     await fsPromises.writeFile(
       path.join(__dirname, "..", "model", "users.json"),
