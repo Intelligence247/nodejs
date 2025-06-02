@@ -12,3 +12,6 @@
 2025-05-28		16:23:36	023aa538-7709-4035-b98a-81af5e7a6230	TypeError: Cannot destructure property 'firstname' of 'req.body' as it is undefined.
 2025-05-29		15:36:23	c401c5af-c893-495c-9f04-addfe6573a4e	ValidationError: User validation failed: roles: Cast to Number failed for value "{ User: 2001, Editor: 1994 }" (type Object) at path "roles"
 2025-05-29		15:36:26	6af838a0-5fa0-461a-b8ea-c7a4564dc24b	ValidationError: User validation failed: roles: Cast to Number failed for value "{ User: 2001, Editor: 1994 }" (type Object) at path "roles"
+2025-05-30		12:28:10	971234df-633a-4834-8126-43f453c44e60	TypeError: res.cooki is not a function
+2025-05-30		12:29:43	c9a84a1b-72af-45e9-a0ab-dd3131e383aa	TypeError: res.cookies is not a function
+2025-05-30		12:29:49	687a0664-b297-40a9-8a6d-dc7c08f26714	TypeError: res.cookies is not a function
