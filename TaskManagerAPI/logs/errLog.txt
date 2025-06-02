@@ -1,0 +1,17 @@
+2025-05-22		12:19:26	0c644393-95ce-4308-92f2-e43e02f4bcee	Error: Not Allowed by Cors
+2025-05-22		12:40:02	f2248f22-6eb8-44c7-8315-3f6a3ed770cb	Error: Not Allowed by Cors
+2025-05-22		14:37:10	624b1695-577b-4ac3-a181-363a027d7555	Error: Not Allowed by Cors
+2025-05-22		14:37:50	6d1c0fbe-8707-4255-80c2-7275ad18dc02	Error: Not Allowed by Cors
+2025-05-22		14:37:59	596d2504-13b2-4cc7-8697-810ca0413d64	Error: Not Allowed by Cors
+2025-05-22		14:38:16	4164afbe-1d9a-4c3e-beb2-564db1b4636d	Error: Not Allowed by Cors
+2025-05-22		14:38:17	06b19fb4-35de-4583-8856-0c76e95304d8	Error: Not Allowed by Cors
+2025-05-28		11:55:35	2ec6b0cd-6fd7-4772-8655-d3e2464cb991	TypeError: {(intermediate value)}.exec is not a function
+2025-05-28		11:58:56	55caa5d1-73e9-452c-a098-45f1cb049d6c	TypeError: {(intermediate value)}.exec is not a function
+2025-05-28		14:06:20	9d46092c-ca9e-49b0-9547-0efd3ca40509	ReferenceError: userDB is not defined
+2025-05-28		15:51:36	8b0ed060-0bac-4046-931b-bd348041ada8	TypeError: Cannot destructure property 'firstname' of 'req.body' as it is undefined.
+2025-05-28		16:23:36	023aa538-7709-4035-b98a-81af5e7a6230	TypeError: Cannot destructure property 'firstname' of 'req.body' as it is undefined.
+2025-05-29		15:36:23	c401c5af-c893-495c-9f04-addfe6573a4e	ValidationError: User validation failed: roles: Cast to Number failed for value "{ User: 2001, Editor: 1994 }" (type Object) at path "roles"
+2025-05-29		15:36:26	6af838a0-5fa0-461a-b8ea-c7a4564dc24b	ValidationError: User validation failed: roles: Cast to Number failed for value "{ User: 2001, Editor: 1994 }" (type Object) at path "roles"
+2025-05-30		12:28:10	971234df-633a-4834-8126-43f453c44e60	TypeError: res.cooki is not a function
+2025-05-30		12:29:43	c9a84a1b-72af-45e9-a0ab-dd3131e383aa	TypeError: res.cookies is not a function
+2025-05-30		12:29:49	687a0664-b297-40a9-8a6d-dc7c08f26714	TypeError: res.cookies is not a function
