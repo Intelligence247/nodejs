@@ -1,22 +1,14 @@
-const myUserDB = {
-  users: require("../Exercise/model/myusers.json"),
-  setUsers: function (data) {
-    this.users = data;
-  },
-};
 const User = require("../model/User");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
-const path = require("path");
-const fsPromises = require("fs").promises;
 
 const handleNewUser = async (req, res) => {
-  const { user, pwd, role } = req?.body;
+  const { email, pwd, role } = req?.body;
 
-  if (!user || !pwd || !role) {
+  if (!email || !pwd || !role) {
     return res.status(400).json({
-      message: "Username, password, and role are required!!!",
+      message: "Email, password, and role are required!!!",
     });
   }
 
@@ -28,7 +20,7 @@ const handleNewUser = async (req, res) => {
   }
 
   try {
-    const duplicate = await User.findOne({ username: user }).exec();
+    const duplicate = await User.findOne({ email: email }).exec();
     if (duplicate) return res.sendStatus(409); // Conflict
 
     const hashedPwd = await bcrypt.hash(pwd, 10);
@@ -47,14 +39,14 @@ const handleNewUser = async (req, res) => {
       : { Users: 2001 };
 
     const result = await User.create({
-      username: user,
+      email: email,
       password: hashedPwd,
       roles: roles,
     });
 
     console.log(result);
     res.status(201).json({
-      message: `User ${user} created successfully with role ${role}! `,
+      message: `User ${email} created successfully with role ${role}! `,
     });
   } catch (err) {
     res.status(500).json({ message: err.message });
@@ -62,15 +54,15 @@ const handleNewUser = async (req, res) => {
 };
 
 const handleLogin = async (req, res) => {
-  const { user, pwd } = req.body;
+  const { email, pwd } = req.body;
 
-  if (!user || !pwd) {
+  if (!email || !pwd) {
     return res
       .status(400)
-      .json({ message: "Username and password are required!" });
+      .json({ message: "Email and password are required!" });
   }
 
-  const foundUser = await User.findOne({ username: user }).exec();
+  const foundUser = await User.findOne({ email: email }).exec();
   if (!foundUser) return res.sendStatus(401); // Unauthorized
 
   const match = await bcrypt.compare(pwd, foundUser.password);
@@ -81,16 +73,17 @@ const handleLogin = async (req, res) => {
   const accessToken = jwt.sign(
     {
       UserInfo: {
-        username: foundUser.username,
+        email: foundUser.email,
+        userId: foundUser._id,
         roles,
       },
     },
     process.env.ACCESS_TOKEN_SECRET,
-    { expiresIn: "60s" }
+    { expiresIn: "1h" }
   );
 
   const refreshToken = jwt.sign(
-    { username: foundUser.username },
+    { email: foundUser.email },
     process.env.REFRESH_TOKEN_SECRET,
     { expiresIn: "1d" }
   );
@@ -105,115 +98,60 @@ const handleLogin = async (req, res) => {
     secure: true, // if using https
   });
 
-  res.json({ accessToken });
+  let activeRoles = [];
+
+  for (let i = 0; i < roles.length; i++) {
+    if (roles[i]) {
+      activeRoles.push(roles[i]);
+    }
+  }
+  res.json({
+    accessToken,
+    user: {
+      email: foundUser.email,
+      roles: activeRoles,
+      userId: foundUser._id,
+    },
+  });
 };
 
-const handleRegisterMyUser = async (req, res) => {
-  const { firstN, lastN, pwd } = req.body;
-
-  if (!firstN || !lastN || !pwd) {
-    return res.status(400).json({
-      message: "Firstname, lastname and password are required",
-    });
-  }
-  const duplicate = myUserDB.users.find(
-    (person) => person.firstname === firstN
-  );
-  if (duplicate) return res.sendStatus(409); // User already Exist
-
+const getUserInfo = async (req, res) => {
   try {
-    const hashedPwd = await bcrypt.hash(pwd, 10);
-    const newUser = {
-      firstname: firstN,
-      lastname: lastN,
-      password: hashedPwd,
-      roles: { User: 2001 },
-    };
-    myUserDB.setUsers([...myUserDB.users, newUser]);
-    await fsPromises.writeFile(
-      path.join(__dirname, "..", "Exercise", "model", "myusers.json"),
-      JSON.stringify(myUserDB.users)
-    );
-    console.log(myUserDB.users);
-    res.status(201).json({
-      success: `New User ${firstN} created`,
-    });
-  } catch (error) {
-    res.status(500).json({ message: error.message });
-  }
-};
+    const userId = req.user?.userId; // from access token middleware
+    if (!userId) return res.sendStatus(401);
 
-const handleLoginMyUser = async (req, res) => {
-  const { firstN, pwd } = req.body;
-  if (!firstN || !pwd) {
-    return res.status(400).json({
-      message: "Firstname and password are required!",
-    });
-  }
+    const user = await User.findById(userId).select("-password -refreshToken"); // exclude sensitive data
+    if (!user) return res.sendStatus(404);
 
-  const foundUser = myUserDB.users.find(
-    (person) => person.firstname === firstN
-  );
-  if (!foundUser) return res.sendStatus(401); // Not Authenticated
-
-  const match = await bcrypt.compare(pwd, foundUser.password);
-
-  if (match) {
-    const roles = Object.values(foundUser.roles);
-    const accessToken = jwt.sign(
-      {
-        UserInfo: {
-          firstname: foundUser.firstname,
-          roles: roles,
-        },
-      },
-      process.env.ACCESS_TOKEN_SECRET,
-      { expiresIn: "60s" }
-    );
-
-    const refreshToken = jwt.sign(
-      { firstname: foundUser.firstname },
-      process.env.REFRESH_TOKEN_SECRET,
-      { expiresIn: "1d" }
-    );
-
-    const otherUsers = myUserDB.users.filter(
-      (person) => person.firstname !== foundUser.firstname
-    );
-
-    const currentUser = { ...foundUser, refreshToken };
-    myUserDB.setUsers([...otherUsers, currentUser]);
-
-    await fsPromises.writeFile(
-      path.join(__dirname, "..", "Exercise", "model", "myusers.json"),
-      JSON.stringify(myUserDB.users)
-    );
-
-    res.cookie("jwt", refreshToken, {
-      httpOnly: true,
-      maxAge: 24 * 60 * 60 * 100,
-    });
-
-    res.json({ accessToken });
-  } else {
-    res.sendStatus(401);
-  }
-};
-
-// GET all employees
-const handleGetAllUsers = async (req, res) => {
-  try {
-    const users = await myUserDB.users;
-    res.json(users);
+    res.json({ user });
   } catch (err) {
-    res.status(500).json({ message: err.message });
+    res.status(500).json({ message: "Server error", error: err.message });
+  }
+};
+
+const updateUserInfo = async (req, res) => {
+  try {
+    const userId = req.user?.userId;
+    const { email } = req.body;
+
+    if (!userId) return res.sendStatus(401);
+    if (!email) return res.status(400).json({ message: "Email is required" });
+
+    const user = await User.findById(userId);
+    if (!user) return res.sendStatus(404);
+
+    user.email = email;
+    await user.save();
+
+    res.json({ message: "Email updated successfully", email: user.email });
+  } catch (err) {
+    res.status(500).json({ message: "Server error", error: err.message });
   }
 };
 
 module.exports = {
   handleNewUser,
   handleLogin,
-  handleRegisterMyUser,
-  handleLoginMyUser,
-  handleGetAllUsers,
+  getUserInfo,
+  updateUserInfo,
 };

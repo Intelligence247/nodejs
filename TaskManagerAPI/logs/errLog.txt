@@ -15,3 +15,19 @@
 2025-05-30		12:28:10	971234df-633a-4834-8126-43f453c44e60	TypeError: res.cooki is not a function
 2025-05-30		12:29:43	c9a84a1b-72af-45e9-a0ab-dd3131e383aa	TypeError: res.cookies is not a function
 2025-05-30		12:29:49	687a0664-b297-40a9-8a6d-dc7c08f26714	TypeError: res.cookies is not a function
+2025-06-02		10:36:49	1b8d1d68-00d6-4f17-b39f-2bf19adf43b2	Error: read ECONNRESET
+2025-06-02		10:36:55	c0493cec-83bd-4b53-9728-decd09a2f86c	Error: read ECONNRESET
+2025-06-02		10:37:00	23b64379-b381-4284-9cac-c5b9911b5dcb	SyntaxError: Unexpected token } in JSON at position 50
+2025-06-02		10:37:06	f2d8ad0c-0bad-4750-9001-7144190c4010	Error: read ECONNRESET
+2025-06-02		11:45:55	0d3c37ad-182d-4de4-b39d-b4d2dbbe1bbb	Error: read ECONNRESET
+2025-06-02		11:51:12	cb57ced8-28c6-4015-9dba-a0d4bae4946e	Error: read ECONNRESET
+2025-06-02		14:20:57	8fa1635a-5b0c-41f3-873b-1877ce12ad76	SyntaxError: Unexpected token } in JSON at position 75
+2025-06-02		14:22:42	f8efef96-8e3a-41dd-b861-617e57ddd455	Error: read ECONNRESET
+2025-06-02		15:51:52	925ba257-c3bf-4cc1-9e2e-c8764652c8dc	Error: read ECONNRESET
+2025-06-02		15:51:54	4d1c7a96-f90e-4677-9aa4-22b141be43f7	Error: read ECONNRESET
+2025-06-02		15:51:56	82cf15fc-20c8-4085-bd30-67683f687c08	Error: read ECONNRESET
+2025-06-02		16:05:01	a036ee8d-f044-4cf2-85bc-b7d7aee7468c	Error: read ECONNRESET
+2025-06-02		22:41:33	bae2eac9-19df-4aa9-b99f-a3fc1ca156a5	TypeError: Found non-callable @@iterator
+2025-06-02		22:41:35	e02e1b93-339f-40ee-88da-448589d1151b	TypeError: Found non-callable @@iterator
+2025-06-02		22:41:37	45e85db1-41bb-4d98-bcae-f3bf528292e5	TypeError: Found non-callable @@iterator
+2025-06-02		22:44:40	0690cf18-2047-428f-9629-9cf9240e3787	ReferenceError: activeRole is not defined

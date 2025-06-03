@@ -3,15 +3,16 @@ const router = express.Router();
 const {
   handleNewUser,
   handleLogin,
-  handleRegisterMyUser,
-  handleLoginMyUser,
-  handleGetAllUsers,
+  getUserInfo,
+  updateUserInfo,
 } = require("../controller/userController");
+const verifyJWT = require("../middleware/verifyJWT");
+const verifyRoles = require("../middleware/verfiyRoles");
+const ROLES_LIST = require("../config/roles_list");
 
 router.post("/registerUser", handleNewUser);
 router.post("/login", handleLogin);
-router.post("/registerMyUser", handleRegisterMyUser);
-router.post("/loginMyUser", handleLoginMyUser);
-router.get("/getAllUsers", handleGetAllUsers);
+router.get("/getUserInfo", verifyJWT,verifyRoles(ROLES_LIST.Admin, ROLES_LIST.Editor), getUserInfo);
+router.put("/updateUser", verifyJWT, updateUserInfo);
 
 module.exports = router;

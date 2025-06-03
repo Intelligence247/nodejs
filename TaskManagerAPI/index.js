@@ -12,9 +12,9 @@ const connectDB = require("./config/dbConn");
 // Built in middleware to handle urlencoded data
 // in other word form data
 
-// File structures: MVC (Model, View, Controller) other include Utils, 
+// File structures: MVC (Model, View, Controller) other include Utils,
 // Services: for function doing specific task taht would needed in different places
-// Middelware: errorHandler 
+// Middelware: errorHandler
 
 const PORT = 4000;
 
@@ -48,7 +48,8 @@ app.use("/logout", require("./routes/logout"));
 
 app.use(verifyJWT);
 
-app.use("/employees", require("./routes/api/employees"));
+// app.use("/employees", require("./routes/api/employees"));
+app.use("/tasks", require("./routes/api/tasks"));
 app.use(errHandler);
 
 mongoose.connection.once("open", () => {
