@@ -12,7 +12,7 @@ const ROLES_LIST = require("../config/roles_list");
 
 router.post("/registerUser", handleNewUser);
 router.post("/login", handleLogin);
-router.get("/getUserInfo", verifyJWT,verifyRoles(ROLES_LIST.Admin, ROLES_LIST.Editor), getUserInfo);
-router.put("/updateUser", verifyJWT, updateUserInfo);
+// router.get("/getUserInfo", verifyJWT,verifyRoles(ROLES_LIST.Admin, ROLES_LIST.Editor), getUserInfo);
+// router.put("/updateUser", verifyJWT, updateUserInfo);
 
 module.exports = router;

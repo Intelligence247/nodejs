@@ -48,7 +48,6 @@ app.use("/logout", require("./routes/logout"));
 
 app.use(verifyJWT);
 
-// app.use("/employees", require("./routes/api/employees"));
 app.use("/tasks", require("./routes/api/tasks"));
 app.use(errHandler);
 

@@ -6,7 +6,7 @@ require("dotenv").config();
 const handleNewUser = async (req, res) => {
   const { email, pwd, role } = req?.body;
 
-  if (!email || !pwd || !role) {
+  if (!email || !pwd) {
     return res.status(400).json({
       message: "Email, password, and role are required!!!",
     });
