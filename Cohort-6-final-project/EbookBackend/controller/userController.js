@@ -2,6 +2,7 @@ const User = require("../models/User");
 const bcrypt = require("bcrypt");
 const asyncHandler = require("express-async-handler");
 const { generateToken } = require("../utils/index");
+const jwt = require("jsonwebtoken");
 
 const registerUser = asyncHandler(async (req, res) => {
   const { name, email, password } = req.body;
@@ -48,7 +49,6 @@ const registerUser = asyncHandler(async (req, res) => {
       cartList,
       orderList,
       isAdmin,
-      token,
     }); // success
   } else {
     res.status(400); // Bad request
@@ -101,7 +101,6 @@ const registerAdmin = asyncHandler(async (req, res) => {
       cartList,
       orderList,
       isAdmin,
-      token
     }); // success
   } else {
     res.status(400); // Bad request
@@ -152,8 +151,22 @@ const loginUser = asyncHandler(async (req, res) => {
     isAdmin,
     cartList,
     orderList,
-    token,
   });
+});
+
+const loginStatus = asyncHandler(async (req, res) => {
+  const token = req.cookies.token;
+  if (!token) {
+    return res.json(false);
+  }
+  //  verify token
+
+  const verified = jwt.verify(token, process.env.JWT_SECRET);
+
+  if (verified) {
+    return res.json(true);
+  }
+  return res.json(false);
 });
 
 const logout = asyncHandler(async (req, res) => {
@@ -203,4 +216,5 @@ module.exports = {
   loginUser,
   logout,
   getUserProfile,
+  loginStatus,
 };

@@ -7,6 +7,7 @@ const {
   loginUser,
   logout,
   getUserProfile,
+  loginStatus,
 } = require("../controller/userController");
 const { protect } = require("../middlewares/authmiddleware");
 
@@ -17,5 +18,5 @@ router.post("/register-admin", registerAdmin);
 router.post("/login", loginUser);
 router.get("/profile", protect, getUserProfile);
 router.post("/logout", logout);
-
+router.get("/loginStatus", loginStatus);
 module.exports = router;

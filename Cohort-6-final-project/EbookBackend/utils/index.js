@@ -2,7 +2,15 @@ const jwt = require("jsonwebtoken");
 const Ebook = require("../models/ebookmodel");
 
 const generateToken = (id) => {
-  return jwt.sign({ id }, process.env.JWT_SECRET, { expiresIn: "1d" });
+  // return jwt.sign({ id }, process.env.JWT_SECRET, { expiresIn: "1d" });
+  try {
+    const token = jwt.sign({ id }, process.env.JWT_SECRET, { expiresIn: "1d" });
+    console.log("Token generation Successful");
+    return token;
+  } catch (error) {
+    console.error("Token generation failed", error.message);
+    return null;
+  }
 };
 
 const genrateUniqueId = async () => {
